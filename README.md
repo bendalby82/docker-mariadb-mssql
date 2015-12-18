@@ -1,4 +1,4 @@
-# MariaDB 10.0 Docker Image (Centos7)
+# MariaDB 10.0 Docker Image with CONNECT to MS SQL (Centos7)
 [![Circle CI](https://circleci.com/gh/million12/docker-mariadb.svg?style=svg)](https://circleci.com/gh/million12/docker-mariadb)
 
 This is a fork of Million12's MariaDB 10.0 Docker [million12/mariadb](https://registry.hub.docker.com/u/million12/mariadb/) image, adding CONNECT engine with correctly configured FreeTDS MS SQL driver. Built on top of official [centos:centos7](https://registry.hub.docker.com/_/centos/) image. Inspired by [Tutum](https://github.com/tutumcloud)'s [tutum/mariadb](https://github.com/tutumcloud/tutum-docker-mariadb) image.
@@ -52,6 +52,7 @@ After this you can start your MariaDB image using volumes in the container creat
 
 Author: Marcin Ryzycki (<marcin@m12.io>)  
 Author: Przemyslaw Ozgo (<linux@ozgo.info>)  
+Forked by: Ben Dalby (<ben.dalby@redhound.net>)  
 
 ---
 
