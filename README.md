@@ -7,13 +7,13 @@ Note: be aware that, by default in this container, MariaDB is configured to use 
 
 ## Usage
 
-`docker pull million12/mariadb`
+`docker pull redhound/docker-mariadb-mssql`
 
 Or, if you prefer to build it on your own:  
-`docker build -t million12/mariadb .`
+`docker build -t redhound/docker-mariadb-mssql .`
 
 Run the image as daemon and bind it to port 3306:  
-`docker run -d -p 3306:3306 million12/mariadb`
+`docker run -d -p 3306:3306 redhound/docker-mariadb-mssql`
 
 The first time that you run your container, a new user admin with all privileges will be created in MariaDB with a random password. To get the password, check the logs of the container by running:  
 `docker logs <CONTAINER_ID>`  
@@ -35,7 +35,7 @@ In this case, `CoFlnc3ZBS58` is the password assigned to the `admin` user.
 ### Custom Password for user admin 
 If you want to use a preset password instead of a random generated one, you can set the environment variable MARIADB_PASS to your specific password when running the container:  
 
-`docker run -d -p 3306:3306 -e MARIADB_PASS="mypass" million12/mariadb`
+`docker run -d -p 3306:3306 -e MARIADB_PASS="mypass" redhound/docker-mariadb-mssql`
 
 ### Mounting the database file volume from other containers
 One way to persist the database data is to store database files in another container. To do so, first create a container that holds database files:  
@@ -46,7 +46,7 @@ This will create a new container and use its folder `/var/lib/mysql` to store Ma
 
 After this you can start your MariaDB image using volumes in the container created above (put the name of container in `--volumes-from`).  
 
-`docker run -d --volumes-from db-data -p 3306:3306 million12/mariadb`
+`docker run -d --volumes-from db-data -p 3306:3306 redhound/docker-mariadb-mssql`
 
 ## Authors
 
