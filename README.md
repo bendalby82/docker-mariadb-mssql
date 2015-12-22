@@ -5,7 +5,7 @@ This is a fork of Million12's MariaDB 10.0 Docker [million12/mariadb](https://re
 
 Note: be aware that, by default in this container, MariaDB is configured to use 1GB memory (innodb_buffer_pool_size in [tuning.cnf](container-files/etc/my.cnf.d/tuning.cnf)). If you try to run it on node with less memory, it will fail.  
 
-If you are already familiar with the Million12 Image, you can skip straight to [the bottom of this page](#using-connect-engine-with-sql-server)  
+:sparkles: If you are already familiar with the Million12 Image, you can skip straight to [the bottom of this page](#using-connect-engine-with-sql-server) :sparkles:   
 
 ## Basic Usage
 
