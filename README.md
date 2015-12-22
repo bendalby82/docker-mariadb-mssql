@@ -7,7 +7,7 @@ Note: be aware that, by default in this container, MariaDB is configured to use 
 
 :sparkles: If you are already familiar with the Million12 Image, you can skip straight to [the bottom of this page](#using-connect-engine-with-sql-server) :sparkles:   
 
-## Basic Usage
+### Basic Usage
 
 `docker pull redhound/docker-mariadb-mssql`
 
