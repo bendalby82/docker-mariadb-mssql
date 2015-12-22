@@ -5,7 +5,7 @@ This is a fork of Million12's MariaDB 10.0 Docker [million12/mariadb](https://re
 
 Note: be aware that, by default in this container, MariaDB is configured to use 1GB memory (innodb_buffer_pool_size in [tuning.cnf](container-files/etc/my.cnf.d/tuning.cnf)). If you try to run it on node with less memory, it will fail.
 
-## Usage
+## Basic Usage
 
 `docker pull redhound/docker-mariadb-mssql`
 
@@ -48,6 +48,49 @@ After this you can start your MariaDB image using volumes in the container creat
 
 `docker run -d --volumes-from db-data -p 3306:3306 redhound/docker-mariadb-mssql`
 
+### Using CONNECT Engine with SQL Server  
+In this example, we are connecting to an AWS SQL Server instance, which was created and populated as follows:  
+
+```sql    
+CREATE TABLE [dbo].[RED_HOUND_SERVICES]  
+ ( ID			int IDENTITY(1,1) PRIMARY KEY  
+  ,NAME	        varchar(255) null  
+  ,DESCRIPTION	varchar(255) null  
+ )  
+   
+INSERT RED_HOUND_SERVICES VALUES ('MAPPING', 'Message Mapping for OTC Derivatives')  
+INSERT RED_HOUND_SERVICES VALUES ('PACKER', 'Automation of Microsoft Server builds')  
+INSERT RED_HOUND_SERVICES VALUES ('DOCKER', 'Docker builds of MariaDB and Tomcat')    
+```  
+
+We then connect to MariaDB and set up a new CONNECT table:  
+
+```sql   
+--Use the default database
+USE mysql;  
+  
+--Useful snippet for testing
+--DROP TABLE IF EXISTS MS_TEST_CONNECT; 
+  
+--Table names and column names are not case sensitive  
+--Use your own values for server IP, database name, username and mypwd.  
+CREATE TABLE MS_TEST_CONNECT (  
+  ID INT(10) NOT NULL,   
+  NAME VARCHAR(255),   
+  DESCRIPTION VARCHAR(255)) ENGINE=CONNECT TABLE_TYPE=ODBC DEFAULT CHARSET=latin1 tabname='RED_HOUND_SERVICES'  
+  CONNECTION='Driver={FreeTDS};Server=10.10.10.10;Port=1433;Database=DBNAME;UID=username;PWD=mypwd;'  
+``` 
+
+This table can then be queried like a regular MariaDB table:  
+
+```sql    
+SELECT * FROM MS_TEST_CONNECT;
+
+ID  NAME     DESCRIPTION  
+1	MAPPING	 Message Mapping for OTC Derivatives
+2	PACKER	 Automation of Microsoft Server builds
+3	DOCKER	 Docker builds of MariaDB and Tomcat  
+``` 
 ## Authors
 
 Author: Marcin Ryzycki (<marcin@m12.io>)  
@@ -56,4 +99,6 @@ Forked by: Ben Dalby (<ben.dalby@redhound.net>)
 
 ---
 
-**Sponsored by** [Typostrap.io - the new prototyping tool](http://typostrap.io/) for building highly-interactive prototypes of your website or web app. Built on top of TYPO3 Neos CMS and Zurb Foundation framework.
+**Sponsored by** [Typostrap.io - the new prototyping tool](http://typostrap.io/) for building highly-interactive prototypes of your website or web app. Built on top of TYPO3 Neos CMS and Zurb Foundation framework.  
+**CONNECT fork by** [redhound.net - map and test high volume message flows](http://www.redhound.net/)
+
