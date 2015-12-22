@@ -93,7 +93,7 @@ ID  NAME     DESCRIPTION
 2	PACKER	 Automation of Microsoft Server builds
 3	DOCKER	 Docker builds of MariaDB and Tomcat  
 ``` 
-## Authors
+### Authors
 
 Author: Marcin Ryzycki (<marcin@m12.io>)  
 Author: Przemyslaw Ozgo (<linux@ozgo.info>)  
